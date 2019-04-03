@@ -8,4 +8,8 @@ def arp_display(packet):
         print(f'ARP Probe from: {packet[ARP].hwsrc}')
 
 # Sniffs packets and runs function if ARP found (looks for only 10 events)
-print(sniff(prn=arp_display, filter="arp", store=0, count=10))
+all_packets = sniff(prn=arp_display, filter="arp", store=0, count=10)
+
+print('Possible Dash Buttons:')
+for packet in all_packets:
+    print(f'{packet[ARP].hwsrc}')
